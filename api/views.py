@@ -5,8 +5,8 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views import View
 
-from recipes.models import (
-    Favorite, Follow, Ingredient, Recipe, ShoppingList, User)
+from recipes.models import (Favorite, Follow, Ingredient, Recipe, ShoppingList,
+                            User)
 
 
 class Favorites(LoginRequiredMixin, View):
