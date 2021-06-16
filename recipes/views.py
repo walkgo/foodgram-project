@@ -74,7 +74,7 @@ class ShoppingListView(LoginRequiredMixin, ListView):
 
 
 class ProfileListView(ListView):
-    """ Вывод страницы одного из авторов рецептов
+    """ Вывод страницы автора рецептов
     """
     paginate_by = 6
     template_name = 'profile.html'
@@ -98,7 +98,7 @@ class ProfileListView(ListView):
 
 
 class RecipeDetailView(DetailView):
-    """ Вывод страницы с детальной информацией о рецепте
+    """ Вывод страницы с информацией о рецепте
     """
     model = Recipe
     template_name = 'recipe.html'
