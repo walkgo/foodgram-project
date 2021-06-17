@@ -18,15 +18,15 @@
 
 2. `docker-compose exec web python3 manage.py migrate`
 
-**Выполнить миграции:**
+**Создать суперпользователя:**
 
  - `docker-compose exec web python manage.py createsuperuser`
 
-**Выполнить миграции:**
+**Собрать статику:**
 
  - `docker-compose exec web python manage.py collectstatic`
 
-**Выполнить миграции:**
+**Загрузить ингридиенты и фикстуры:**
 
  - `docker-compose exec web python manage.py loaddata fixtures.json`
  
