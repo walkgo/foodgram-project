@@ -69,7 +69,7 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           stack_file_name: docker-compose.yaml
           script: |
-            sudo docker bazanovdev/foodgram_web
+            sudo docker pull bazanovdev/foodgram_web
             sudo docker-compose down
             # Создаст файл для переменных окружения
             touch .env 
