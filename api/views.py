@@ -1,4 +1,5 @@
 import json
+from http import HTTPStatus
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
@@ -21,7 +22,7 @@ class Favorites(LoginRequiredMixin, View):
                 user=request.user, recipe=recipe
             )
             return JsonResponse({'success': created})
-        return JsonResponse({'success': False}, status=400)
+        return JsonResponse({'success': False}, status=HTTPStatus.NOT_FOUND)
 
     def delete(self, request, recipe_id):
         recipe = get_object_or_404(
@@ -45,7 +46,7 @@ class Follows(LoginRequiredMixin, View):
                 user=request.user, author=author
             )
             return JsonResponse({'success': created})
-        return JsonResponse({'success': False}, status=400)
+        return JsonResponse({'success': False}, status=HTTPStatus.NOT_FOUND)
 
     def delete(self, request, author_id):
         author = get_object_or_404(User, id=author_id)
@@ -69,7 +70,7 @@ class Purchases(LoginRequiredMixin, View):
                 user=request.user, recipe=recipe
             )
             return JsonResponse({'success': created})
-        return JsonResponse({'success': False}, status=400)
+        return JsonResponse({'success': False}, status=HTTPStatus.NOT_FOUND)
 
     def delete(self, request, recipe_id):
         recipe = get_object_or_404(Recipe, id=recipe_id)
