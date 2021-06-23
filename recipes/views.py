@@ -118,7 +118,7 @@ def shoplist_download(request):
         total=Sum('amount')).order_by('ingredient')
     file_data = ''
     for item in ingredients:
-        line = ' '.join(str(value) for value in item.values())
+        line = '\n'.join(str(value) for value in item.values())
         file_data += line + '\n'
     response = HttpResponse(
         file_data, content_type='application/text charset=utf-8'

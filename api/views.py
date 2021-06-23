@@ -9,6 +9,11 @@ from django.views import View
 from recipes.models import (Favorite, Follow, Ingredient, Recipe, ShoppingList,
                             User)
 
+SUCCESS_RESPONSE = JsonResponse({'success': True})
+BAD_RESPONSE = JsonResponse(
+    {'success': False}, status=HTTPStatus.BAD_REQUEST
+)
+
 
 class Favorites(LoginRequiredMixin, View):
     """ Функция добавления/удаления рецепта из "Избранного"
@@ -29,7 +34,7 @@ class Favorites(LoginRequiredMixin, View):
             Favorite, recipe=recipe_id, user=request.user
         )
         recipe.delete()
-        return JsonResponse({'success': True})
+        return SUCCESS_RESPONSE
 
 
 class Follows(LoginRequiredMixin, View):
@@ -54,8 +59,8 @@ class Follows(LoginRequiredMixin, View):
             user=request.user, author=author
         ).delete()
         if removed:
-            return JsonResponse({'success': True})
-        return JsonResponse({'success': False})
+            return SUCCESS_RESPONSE
+        return BAD_RESPONSE
 
 
 class Purchases(LoginRequiredMixin, View):
@@ -78,8 +83,8 @@ class Purchases(LoginRequiredMixin, View):
             user=request.user, recipe=recipe
         ).delete()
         if removed:
-            return JsonResponse({'success': True})
-        return JsonResponse({'success': False})
+            return SUCCESS_RESPONSE
+        return BAD_RESPONSE
 
 
 class Ingredients(LoginRequiredMixin, View):
