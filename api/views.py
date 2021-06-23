@@ -33,7 +33,7 @@ class Favorites(LoginRequiredMixin, View):
         recipe = get_object_or_404(
             Favorite, recipe=recipe_id, user=request.user
         )
-        recipe.delete()
+        Favorite.objects.filter(user=request.user, recipe=recipe)
         return SUCCESS_RESPONSE
 
 
