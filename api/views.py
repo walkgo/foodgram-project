@@ -13,6 +13,9 @@ SUCCESS_RESPONSE = JsonResponse({'success': True})
 BAD_RESPONSE = JsonResponse(
     {'success': False}, status=HTTPStatus.BAD_REQUEST
 )
+NOT_FOUND_RESPONSE = JsonResponse(
+    {'success': False}, status=HTTPStatus.NOT_FOUND
+)
 
 
 class Favorites(LoginRequiredMixin, View):
@@ -27,14 +30,16 @@ class Favorites(LoginRequiredMixin, View):
                 user=request.user, recipe=recipe
             )
             return JsonResponse({'success': created})
-        return JsonResponse({'success': False}, status=HTTPStatus.NOT_FOUND)
+        return NOT_FOUND_RESPONSE
 
     def delete(self, request, recipe_id):
         recipe = get_object_or_404(
             Favorite, recipe=recipe_id, user=request.user
         )
-        Favorite.objects.filter(user=request.user, recipe=recipe)
-        return SUCCESS_RESPONSE
+        if recipe:
+            recipe.delete()
+            return SUCCESS_RESPONSE
+        return BAD_RESPONSE
 
 
 class Follows(LoginRequiredMixin, View):
@@ -51,7 +56,7 @@ class Follows(LoginRequiredMixin, View):
                 user=request.user, author=author
             )
             return JsonResponse({'success': created})
-        return JsonResponse({'success': False}, status=HTTPStatus.NOT_FOUND)
+        return NOT_FOUND_RESPONSE
 
     def delete(self, request, author_id):
         author = get_object_or_404(User, id=author_id)
@@ -75,7 +80,7 @@ class Purchases(LoginRequiredMixin, View):
                 user=request.user, recipe=recipe
             )
             return JsonResponse({'success': created})
-        return JsonResponse({'success': False}, status=HTTPStatus.NOT_FOUND)
+        return NOT_FOUND_RESPONSE
 
     def delete(self, request, recipe_id):
         recipe = get_object_or_404(Recipe, id=recipe_id)
