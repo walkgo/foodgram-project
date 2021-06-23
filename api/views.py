@@ -9,7 +9,6 @@ from django.views import View
 from recipes.models import (Favorite, Follow, Ingredient, Recipe, ShoppingList,
                             User)
 
-
 SUCCESS_RESPONSE = JsonResponse({'success': True})
 BAD_RESPONSE = JsonResponse(
     {'success': False}, status=HTTPStatus.BAD_REQUEST
