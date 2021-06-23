@@ -13,6 +13,10 @@ class Tag(models.Model):
     slug = models.SlugField(blank=True)
     checkbox_style = models.CharField(max_length=15, blank=True)
 
+    class Meta:
+        verbose_name = 'Тэг'
+        verbose_name_plural = 'Тэги'
+
     def __str__(self):
         return self.title
 
@@ -27,6 +31,8 @@ class Ingredient(models.Model):
 
     class Meta:
         ordering = ('title',)
+        verbose_name = 'Ингредиент'
+        verbose_name_plural = 'Ингредиенты'
 
     def __str__(self):
         return self.title
@@ -67,6 +73,8 @@ class Recipe(models.Model):
 
     class Meta:
         ordering = ('-pub_date',)
+        verbose_name = 'Рецепт'
+        verbose_name_plural = 'Рецепты'
 
     def __str__(self):
         return self.title
@@ -87,6 +95,10 @@ class RecipeIngredient(models.Model):
         Recipe, on_delete=models.CASCADE, related_name='recipe_ingredients'
     )
 
+    class Meta:
+        verbose_name = 'Ингредиент в рецепте'
+        verbose_name_plural = 'Ингредиенты в рецепте'
+
 
 class Follow(models.Model):
     user = models.ForeignKey(
@@ -106,6 +118,8 @@ class Follow(models.Model):
                 check=~models.Q(user=models.F('author'))
             ),
         ]
+        verbose_name = 'Подписка'
+        verbose_name_plural = 'Подписки'
 
 
 class Favorite(models.Model):
@@ -124,6 +138,8 @@ class Favorite(models.Model):
                 fields=('user', 'recipe'), name='unique_favorite'
             )
         ]
+        verbose_name = 'Избранное'
+        verbose_name_plural = 'Избранные'
 
 
 class ShoppingList(models.Model):
@@ -142,3 +158,5 @@ class ShoppingList(models.Model):
                 fields=('user', 'recipe'), name='unique_shoplist'
             )
         ]
+        verbose_name = 'Список покупок'
+        verbose_name_plural = 'Списки покупок'
