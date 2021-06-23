@@ -5,6 +5,8 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import DetailView, ListView
 
+from foodgram.settings import RECIPES_PAGINATE_BY
+
 from .forms import RecipeForm
 from .models import Ingredient, Recipe, RecipeIngredient, User
 from .utils import get_ingredients
@@ -13,7 +15,7 @@ from .utils import get_ingredients
 class IndexListView(ListView):
     """ Вывод главной страницы с рецептами
     """
-    paginate_by = 6
+    paginate_by = RECIPES_PAGINATE_BY
     template_name = 'index.html'
     context_object_name = 'index'
 
@@ -30,7 +32,7 @@ class IndexListView(ListView):
 class FollowListView(LoginRequiredMixin, ListView):
     """ Вывод страницы с подписками
     """
-    paginate_by = 6
+    paginate_by = RECIPES_PAGINATE_BY
     template_name = 'follow.html'
     context_object_name = 'follow'
 
@@ -44,7 +46,7 @@ class FollowListView(LoginRequiredMixin, ListView):
 class FavoriteListView(LoginRequiredMixin, ListView):
     """ Вывод страницы с избранными рецептами
     """
-    paginate_by = 6
+    paginate_by = RECIPES_PAGINATE_BY
     template_name = 'favorite.html'
     context_object_name = 'favorite'
 
@@ -76,7 +78,7 @@ class ShoppingListView(LoginRequiredMixin, ListView):
 class ProfileListView(ListView):
     """ Вывод страницы автора рецептов
     """
-    paginate_by = 6
+    paginate_by = RECIPES_PAGINATE_BY
     template_name = 'profile.html'
     context_object_name = 'profile'
 

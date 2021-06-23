@@ -121,3 +121,5 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     }
 }
+
+RECIPES_PAGINATE_BY = 6
