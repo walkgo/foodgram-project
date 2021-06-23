@@ -9,9 +9,10 @@ from django.views import View
 from recipes.models import (Favorite, Follow, Ingredient, Recipe, ShoppingList,
                             User)
 
+
 SUCCESS_RESPONSE = JsonResponse({'success': True})
 BAD_RESPONSE = JsonResponse(
-    {'success': False}, status=HTTPStatus.BAD_REQUEST
+      {'success': False}, status=HTTPStatus.BAD_REQUEST
 )
 
 
@@ -33,10 +34,8 @@ class Favorites(LoginRequiredMixin, View):
         recipe = get_object_or_404(
             Favorite, recipe=recipe_id, user=request.user
         )
-        removed = Favorite.objects.filter(user=request.user, recipe=recipe)
-        if removed:
-            return SUCCESS_RESPONSE
-        return BAD_RESPONSE
+        recipe.delete()
+        return SUCCESS_RESPONSE
 
 
 class Follows(LoginRequiredMixin, View):
