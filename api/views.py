@@ -12,7 +12,7 @@ from recipes.models import (Favorite, Follow, Ingredient, Recipe, ShoppingList,
 
 SUCCESS_RESPONSE = JsonResponse({'success': True})
 BAD_RESPONSE = JsonResponse(
-      {'success': False}, status=HTTPStatus.BAD_REQUEST
+    {'success': False}, status=HTTPStatus.BAD_REQUEST
 )
 
 
