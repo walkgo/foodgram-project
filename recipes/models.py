@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.core.validators import MinValueValidator
 from django.db import models
 from slugify import slugify
 
@@ -52,7 +53,8 @@ class Recipe(models.Model):
     tags = models.ManyToManyField(
         Tag, verbose_name='Теги'
     )
-    duration = models.PositiveIntegerField(
+    duration = models.IntegerField(
+        validators=[MinValueValidator(1)],
         verbose_name='Время приготовления в минутах'
     )
     slug = models.SlugField(
@@ -75,7 +77,9 @@ class Recipe(models.Model):
 
 
 class RecipeIngredient(models.Model):
-    amount = models.PositiveIntegerField(verbose_name='Количество')
+    amount = models.IntegerField(
+        validators=[MinValueValidator(1)], verbose_name='Количество'
+    )
     ingredient = models.ForeignKey(
         Ingredient, on_delete=models.CASCADE, related_name='recipe_ingredients'
     )
