@@ -7,6 +7,10 @@
 **Тестовые пользователи:**
 
 ```
+(admin)
+login:just
+pass:just643717
+
 Сидр Сидоров
 login: sidr
 pass: sidrsidorov
