@@ -117,9 +117,12 @@ def shoplist_download(request):
         recipe_id__in=list(shopping)).annotate(
         total=Sum('amount')).order_by('ingredient')
     file_data = ''
-    for item in ingredients:
-        line = ' '.join(str(value) for value in item.values())
-        file_data += line + '\n'
+    line = '\n'.join([
+        f"{item['ingredient_id__title']}"
+        f"({item['ingredient_id__unit']}) - {item['total']}"
+        for item in ingredients
+    ])
+    file_data += line + '\n'
     response = HttpResponse(
         file_data, content_type='application/text charset=utf-8'
     )

@@ -33,11 +33,13 @@ class Favorites(LoginRequiredMixin, View):
         return NOT_FOUND_RESPONSE
 
     def delete(self, request, recipe_id):
-        recipe = get_object_or_404(
-            Favorite, recipe=recipe_id, user=request.user
-        )
-        recipe.delete()
-        return SUCCESS_RESPONSE
+        recipe = get_object_or_404(Recipe, id=recipe_id)
+        removed = Favorite.objects.filter(
+            user=request.user, recipe=recipe
+        ).delete()
+        if removed:
+            return SUCCESS_RESPONSE
+        return BAD_RESPONSE
 
 
 class Follows(LoginRequiredMixin, View):
