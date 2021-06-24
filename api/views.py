@@ -36,10 +36,8 @@ class Favorites(LoginRequiredMixin, View):
         recipe = get_object_or_404(
             Favorite, recipe=recipe_id, user=request.user
         )
-        if recipe:
-            recipe.delete()
-            return SUCCESS_RESPONSE
-        return BAD_RESPONSE
+        recipe.delete()
+        return SUCCESS_RESPONSE
 
 
 class Follows(LoginRequiredMixin, View):
