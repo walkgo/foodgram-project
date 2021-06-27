@@ -14,7 +14,8 @@
           </ul>
           {% else %}
           <ul class="nav__items list">
-              {%if request.resolver_match.view_name == 'index' %}<li class="nav__item nav__item_active">{% else %}<li class="nav__item">{% endif %}<li class="nav__item nav__item_active"><a href="{% url 'index' %}" class="nav__link link">Рецепты</a></li>
+            {% if request.resolver_match.view_name == 'index' %}<li class="nav__item nav__item_active">{% else %}<li class="nav__item">{% endif %}<a href="{% url 'index' %}" class="nav__link link">Рецепты</a></li>
+            {% if request.resolver_match.view_name == 'shopping_list' %}<li class="nav__item nav__item_active">{% else %}<li class="nav__item">{% endif %}<a href="{% url 'shopping_list' %}" class="nav__link link">Список покупок</a> <span class="badge badge_style_blue nav__badge" id="counter">{% if count %}{{ count }}{% endif %}</span></li>
           </ul>
           <ul class="nav__items list">
               {% if request.resolver_match.view_name == 'LoginView' %}<li class="nav__item nav__item_active">{% else %}<li class="nav__item">{% endif %}<li class="nav__item"><a href="{% url 'login' %}" class="nav__link link">Войти</a></li>

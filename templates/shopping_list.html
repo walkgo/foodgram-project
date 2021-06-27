@@ -24,7 +24,12 @@
                 {% include "includes/shop_card.html" %}
         {% endfor %}
     </ul>
+    {% if shopping_list %}
     <a href="{% url 'shoplist_download' %}"><button class="button button_style_blue">Скачать список</button></a>
+    {% else %}
+    <p>Ваш список покупок пуст!</p>
+    <a href="{% url 'index' %}"><button class="button button_style_blue">Вернуться на главную</button></a>
+    {% endif %}
 </div>
 
 {% endblock %} 
