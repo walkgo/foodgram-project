@@ -80,8 +80,10 @@ class Recipe(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
-        return super().save()
+        super().save()
+        if not self.slug:
+            self.slug = slugify(self.title) + "-" + str(self.id)
+            self.save()
 
 
 class RecipeIngredient(models.Model):
