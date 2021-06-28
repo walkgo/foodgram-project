@@ -139,18 +139,21 @@ def new_recipe(request):
     ingredients = get_ingredients(request)
 
     if form.is_valid():
-        recipe = form.save(commit=False)
-        recipe.author = user
-        recipe.save()
+        if not ingredients:
+            form.add_error(None, 'Добавьте ингредиенты')
+        else:
+            recipe = form.save(commit=False)
+            recipe.author = user
+            recipe.save()
 
-        for ing_name, amount in ingredients.items():
-            ingredient = get_object_or_404(Ingredient, title=ing_name)
-            recipe_ing = RecipeIngredient(
-                recipe=recipe, ingredient=ingredient, amount=amount
-            )
-            recipe_ing.save()
-        form.save_m2m()
-        return redirect('index')
+            for ing_name, amount in ingredients.items():
+                ingredient = get_object_or_404(Ingredient, title=ing_name)
+                recipe_ing = RecipeIngredient(
+                    recipe=recipe, ingredient=ingredient, amount=amount
+                )
+                recipe_ing.save()
+            form.save_m2m()
+            return redirect('index')
 
     return render(request, 'new_recipe.html', {'form': form})
 
@@ -169,18 +172,21 @@ def recipe_edit(request, recipe_id):
         return redirect('index')
 
     if form.is_valid():
-        RecipeIngredient.objects.filter(recipe=recipe).delete()
-        recipe = form.save(commit=False)
-        recipe.author = request.user
-        recipe.save()
-        for ing_name, amount in ingredients.items():
-            ingredient = get_object_or_404(Ingredient, title=ing_name)
-            recipe_ing = RecipeIngredient(
-                recipe=recipe, ingredient=ingredient, amount=amount
-            )
-            recipe_ing.save()
-        form.save_m2m()
-        return redirect('index')
+        if not ingredients:
+            form.add_error(None, 'Добавьте ингредиенты')
+        else:
+            RecipeIngredient.objects.filter(recipe=recipe).delete()
+            recipe = form.save(commit=False)
+            recipe.author = request.user
+            recipe.save()
+            for ing_name, amount in ingredients.items():
+                ingredient = get_object_or_404(Ingredient, title=ing_name)
+                recipe_ing = RecipeIngredient(
+                    recipe=recipe, ingredient=ingredient, amount=amount
+                )
+                recipe_ing.save()
+            form.save_m2m()
+            return redirect('index')
 
     return render(
         request, 'recipe_edit.html', {'form': form, 'recipe': recipe},
