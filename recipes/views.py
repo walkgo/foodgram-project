@@ -139,7 +139,7 @@ def new_recipe(request):
         ingredients = get_ingredients(request)
         if not ingredients:
             form.add_error(None, 'Добавьте ингредиенты')
-        duration = request.POST.get(f'duration')
+        duration = request.POST.get(f'{"duration"}')
         if int(duration) <= 0:
             form.add_error(None,
                            'Время приготовления должно быть больше нуля'
