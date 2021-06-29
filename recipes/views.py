@@ -132,20 +132,23 @@ def shoplist_download(request):
 
 @login_required
 def new_recipe(request):
-    """ Страница с формой добавления нового рецепта
-    """
-    form = RecipeForm(request.POST or None, files=request.FILES or None)
-    user = get_object_or_404(User, username=request.user)
-    ingredients = get_ingredients(request)
-
-    if form.is_valid():
+    if request.method != 'POST':
+        form = RecipeForm(request.POST or None, files=request.FILES or None)
+    else:
+        form = RecipeForm(request.POST or None, files=request.FILES or None)
+        ingredients = get_ingredients(request)
         if not ingredients:
             form.add_error(None, 'Добавьте ингредиенты')
-        else:
+        duration = request.POST.get(f'duration')
+        if int(duration) <= 0:
+            form.add_error(None,
+                           'Время приготовления должно быть больше нуля'
+                           )
+        user = get_object_or_404(User, username=request.user)
+        if form.is_valid():
             recipe = form.save(commit=False)
             recipe.author = user
             recipe.save()
-
             for ing_name, amount in ingredients.items():
                 ingredient = get_object_or_404(Ingredient, title=ing_name)
                 recipe_ing = RecipeIngredient(
