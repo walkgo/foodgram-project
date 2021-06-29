@@ -124,12 +124,12 @@ CACHES = {
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
+EMAIL_HOST_USER = 'bazanov.dev'
+EMAIL_HOST_PASSWORD = 'gelizjustplay643717'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
-SERVER_EMAIL = os.environ.get('SERVER_EMAIL')
-DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
+SERVER_EMAIL = 'bazanov.dev@gmail.com'
+DEFAULT_FROM_EMAIL = 'bazanov.dev@gmail.com'
 
 RECIPES_PAGINATE_BY = 6
