@@ -21,7 +21,8 @@ class IngredientAdmin(admin.ModelAdmin):
 
 class RecipeAdmin(admin.ModelAdmin):
     inlines = (RecipeIngredientInline,)
-    list_display = ('author', 'title',)
+    list_display = ('author', 'title', 'pub_date',)
+    list_display_links = ('author', 'title',)
     list_filter = ('author', 'title', 'tags',)
     prepopulated_fields = {'slug': ('title',)}
 
