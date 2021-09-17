@@ -55,8 +55,11 @@ python3 manage.py runserver
 ### Скриншоты
 
 ![alt text](screenshots/01.png "Главная страница")
+---
 ![alt text](screenshots/02.png "Страница рецепта")
+---
 ![alt text](screenshots/03.png "Список покупок")
+---
 ![alt text](screenshots/04.png "Страница автора")
 
 ### Автор
