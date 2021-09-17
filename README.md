@@ -1,64 +1,64 @@
-# foodgram
+# foodgram (Продуктовый помощник)
 
 ![Django-app workflow](https://github.com/walkgo/foodgram-project/actions/workflows/foodgram_workflow.yaml/badge.svg)
 
-**Адрес:** http://130.193.40.74/
-
-**Тестовые пользователи:**
-
-```
-(admin)
-login:just
-pass:just643717
-
-Сидр Сидоров
-login: sidr
-pass: sidrsidorov
-
-Иван Иванов
-login: ivan
-pass: ivanivanov
-```
-
-В проект включены так же тестовые данные в виде нескольких рецептов и пользователей для локальной проверки.
-
-Для их загрузки необходимо выполнить:
-
-`docker-compose exec web python manage.py loaddata fixtures.json`
-
-### Дипломный проект "Foodgram"
+### Описание
 
 Сайт, на котором пользователи публикуют рецепты, добавляют чужие рецепты в избранное и подписываются на публикации других авторов. Сервис «Список покупок» позволяет пользователям создавать список продуктов, которые нужно купить для приготовления выбранных блюд.
 
-Для запуска на сервере необходим установленный Docker, docker-compose.
+### Технологии
 
-После запуска необходимо произвести ряд действий:
+Python 3.7 Django 3.0.5
 
-**Выполнить миграции:**
+### Запуск проекта dev-режиме
 
-1. `docker-compose exec web python3 manage.py makemigrations`
+-   Создайте и активируйте виртуальное окружение
+-   Установите зависимости из файла requirements.txt
 
-2. `docker-compose exec web python3 manage.py migrate`
+```
+pip install -r requirements.txt
+```
 
-**Создать суперпользователя:**
+-   Выполните миграции:
 
- - `docker-compose exec web python manage.py createsuperuser`
+```
+python3 manage.py makemigrations
+```
+```
+python3 manage.py migrate
+```
 
-**Собрать статику:**
+-   Соберите статику:
 
- - `docker-compose exec web python manage.py collectstatic`
+```
+python3 manage.py collectstatic
+```
 
-**Загрузить ингридиенты и фикстуры:**
+-   Загрузите фикстуры:
 
- - `docker-compose exec web python manage.py loaddata fixtures.json`
- 
- 
-#### Использованные технологии
+```
+python3 manage.py loaddata fixtures.json
+```
 
-Python, Django, Docker, Nginx, Postgresql, Gunicorn
+-   Добавьте администратора (опционально):
 
-***
+```
+python3 manage.py createsuperuser
+```
 
-**Licence** | [MIT](https://github.com/walkgo/yamdb_final/blob/master/LICENSE)
+-   В папке с файлом manage.py выполните команду:
 
-**Author** | [walkgo](https://github.com/walkgo/)
+```
+python3 manage.py runserver
+```
+
+### Скриншоты
+
+![alt text](screenshots/01.png "Главная страница")
+![alt text](screenshots/02.png "Страница рецепта")
+![alt text](screenshots/03.png "Список покупок")
+![alt text](screenshots/04.png "Страница автора")
+
+### Автор
+
+walkgo
